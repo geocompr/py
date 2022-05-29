@@ -68,7 +68,7 @@ tm_shape(nz) +
 ## Interactive maps
 
 - When are interactive maps useful
-- Holoviews: facetted plotting
+- Holoviews: facetted plotting aka. small multiples
 - Panel: allows you to create applications/dashboards
 
 ```{python}
