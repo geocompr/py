@@ -28,7 +28,11 @@ else:
 ```{python}
 import matplotlib as mpl
 import geopandas as gpd
-nz = gpd.read_file("data/nz.gpkg") 
+nz = gpd.read_file("data/nz.gpkg")  
+```
+
+```{python}
+nz 
 ```
 
 ## Static maps
@@ -66,6 +70,33 @@ tm_shape(nz) +
 - When are interactive maps useful
 - Holoviews: facetted plotting
 - Panel: allows you to create applications/dashboards
+
+```{python}
+import hvplot.pandas
+from holoviews import opts, dim, Layout
+opts.defaults(opts.Overlay(active_tools=["wheel_zoom"]))
+hv_defaults = {'geo':True, 'color':'hotpink', 'tiles':'OSM'}
+```
+
+```{python}
+nz = nz.to_crs(4326)
+nz.hvplot(**hv_defaults)
+```
+
+```{python}
+Layout([group.hvplot(title=name, **hv_defaults) for name, group in nz.groupby('Island')])
+```
+
+```{python}
+# I think this should work, but it doesn't
+#nz.hvplot(by='Island', subplots=True, **hv_defaults)
+```
+
+```{python}
+# For comparison, this works
+#import pandas as pd
+#df.hvplot.scatter(x='Median_income', y='Land_area', by='Island', subplots=True)
+```
 
 ### GeoPandas explore
 ### Layers
